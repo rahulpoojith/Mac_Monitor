@@ -2,9 +2,15 @@
 
 A native macOS menu-bar utility with a live dashboard for CPU, RAM, storage, temperature, network, battery, thermal pressure, uptime, and process indicators.
 
-## Install and Run
+## Installation Status
 
-Mac Monitor builds locally from source. You need macOS 13 or newer, Git, and the Swift 6 toolchain. Install Apple's command-line developer tools if Swift is not already available:
+A ready-to-download installer is not available yet. This repository currently contains the app's source code, so the steps below require Terminal, Git, and the Swift 6 toolchain. They are intended for developers, not as a simple install for general users.
+
+A user-friendly release would provide a signed and notarized `.dmg`: download it, open it, drag **Mac Monitor** to **Applications**, then launch it. The app does not have that release package yet. Signing and notarization require Apple Developer distribution setup.
+
+## Build from Source
+
+You need macOS 13 or newer, Git, and the Swift 6 toolchain. Install Apple's command-line developer tools if Swift is not already available:
 
 ```sh
 xcode-select --install
@@ -21,7 +27,7 @@ open dist/MacTempChecker.app
 
 The build script compiles the app and generates its icon. The dashboard and menu-bar panel refresh every three seconds; use the Refresh button or Command-R for an immediate update.
 
-To install it in Applications:
+To copy the built app into Applications:
 
 ```sh
 ditto dist/MacTempChecker.app "/Applications/Mac Monitor.app"
