@@ -2,13 +2,19 @@
 
 A native macOS menu-bar utility with a live dashboard for CPU, RAM, storage, temperature, network, battery, thermal pressure, uptime, and process indicators.
 
-## Installation Status
+## Install on Apple Silicon
 
-A ready-to-download installer is not available yet. This repository currently contains the app's source code, so the steps below require Terminal, Git, and the Swift 6 toolchain. They are intended for developers, not as a simple install for general users.
+Download the [MacMonitor-1.0-arm64.dmg release](https://github.com/rahulpoojith/Mac_Monitor/releases/download/v1.0.0/MacMonitor-1.0-arm64.dmg). This build requires macOS 13 or newer and an Apple-silicon Mac. You do not need to clone the repository or use Terminal.
 
-A user-friendly release would provide a signed and notarized `.dmg`: download it, open it, drag **Mac Monitor** to **Applications**, then launch it. The app does not have that release package yet. Signing and notarization require Apple Developer distribution setup.
+1. Open the downloaded `.dmg` file.
+2. In the window that appears, drag **Mac Monitor.app** onto the **Applications** shortcut.
+3. Open **Applications** in Finder and launch **Mac Monitor**.
 
-## Build from Source
+This release is unsigned and not notarized, so macOS may show a security warning. Only proceed if you trust this project. If you choose to open it, Control-click **Mac Monitor** in Applications, choose **Open**, and confirm the prompt.
+
+To start Mac Monitor automatically after sign-in, add it under **System Settings → General → Login Items**.
+
+## Build from Source (Developers)
 
 You need macOS 13 or newer, Git, and the Swift 6 toolchain. Install Apple's command-line developer tools if Swift is not already available:
 
@@ -25,18 +31,15 @@ cd Mac_Monitor
 open dist/MacTempChecker.app
 ```
 
-The build script compiles the app and generates its icon. The dashboard and menu-bar panel refresh every three seconds; use the Refresh button or Command-R for an immediate update.
-
-To copy the built app into Applications:
+To create a drag-to-Applications DMG locally, run:
 
 ```sh
-ditto dist/MacTempChecker.app "/Applications/Mac Monitor.app"
-open "/Applications/Mac Monitor.app"
+./scripts/build-dmg.sh
 ```
 
-To launch it automatically after sign-in, add **Mac Monitor** under **System Settings → General → Login Items**.
+The DMG is written to `dist/MacMonitor-1.0-<architecture>.dmg`. Local builds are unsigned and not notarized.
 
-This project builds an unsigned, non-notarized app locally. If macOS blocks the first launch, only bypass the warning if you trust the source you cloned: Control-click the app in Finder, choose **Open**, and confirm.
+The build script compiles the app and generates its icon. The dashboard and menu-bar panel refresh every three seconds; use the Refresh button or Command-R for an immediate update.
 
 For development, run the executable directly with `swift run` from the repository root.
 
