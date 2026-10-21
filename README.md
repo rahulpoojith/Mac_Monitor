@@ -2,28 +2,37 @@
 
 A native macOS menu-bar utility with a live dashboard for CPU, RAM, storage, temperature, network, battery, thermal pressure, uptime, and process indicators.
 
-## Run
+## Install and Run
 
-From this folder, run:
+Mac Monitor builds locally from source. You need macOS 13 or newer, Git, and the Swift 6 toolchain. Install Apple's command-line developer tools if Swift is not already available:
 
 ```sh
-swift run
+xcode-select --install
 ```
 
-The dashboard and menu-bar summary update every three seconds. Use the Refresh button or Command-R to request an immediate update.
-
-## Run outside VS Code
-
-Build a standalone macOS app bundle:
+Clone the repository and build the standalone app bundle:
 
 ```sh
+git clone https://github.com/rahulpoojith/Mac_Monitor.git
+cd Mac_Monitor
 ./scripts/build-app.sh
 open dist/MacTempChecker.app
 ```
 
-The build script generates and embeds the Mac Monitor app icon.
+The build script compiles the app and generates its icon. The dashboard and menu-bar panel refresh every three seconds; use the Refresh button or Command-R for an immediate update.
 
-After it opens, you can close VS Code. To start it automatically when you sign in, add **Mac Monitor** under **System Settings → General → Login Items**. You can move `dist/MacTempChecker.app` to your Applications folder if you want it installed there.
+To install it in Applications:
+
+```sh
+ditto dist/MacTempChecker.app "/Applications/Mac Monitor.app"
+open "/Applications/Mac Monitor.app"
+```
+
+To launch it automatically after sign-in, add **Mac Monitor** under **System Settings → General → Login Items**.
+
+This project builds an unsigned, non-notarized app locally. If macOS blocks the first launch, only bypass the warning if you trust the source you cloned: Control-click the app in Finder, choose **Open**, and confirm.
+
+For development, run the executable directly with `swift run` from the repository root.
 
 ## Temperature
 
